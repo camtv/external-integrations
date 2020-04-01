@@ -1,4 +1,4 @@
-# External Integration
+# External Integration SDK and API
 API di Cam.TV per l'accesso, autenticazione e collegamento dell'account Cam.TV di un utente direttamente al dominio dell'applicazione.
 
 Le API consentono il login e la registrazione tramite credenziali Cam.TV, permettono di ottenere i dati anagrafici dell'utente e dei relativi sponsor. Offrono inoltre la possibilità di attribuire all'utente uno specifico abbonamento o di un upgrade dello stesso. 
