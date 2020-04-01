@@ -34,5 +34,8 @@ Tutte le API Requests prevedono il metodo POST form-url-encoded. Le api sono int
 ## Responses
 Tutte le API Responses sono in formato JSON
 
+## Esempi
+Esempi sull'utilizzo delle API ExternalIntegration di Cam.TV possono essere consultate dalla [Documentazione di Postman](https://documenter.getpostman.com/view/9304344/SW7Z48Z2)
+
 ## Contatto
 Per informazioni o richieste di chiarimento, scrivere a:  [admin@cam.tv](mailto:admin@cam.tv)
