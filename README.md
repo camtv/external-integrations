@@ -29,13 +29,97 @@ To authenticate the user and enable him to use the ExternalIntegration API, your
 API ExternalIntegration Cam.TV v2.0
 
 ## Requests
-All API Requests includes the POST form-url-encoded method. APIs are intended server-to-server, authentication is done through header Authorization with Bearer consisting of a SecretApiKey provided by Cam.TV and only associated with the domain/IP of the application server.
+All API Requests includes the POST form-url-encoded method. APIs are intended server-to-server, authentication is done through header Authorization with Bearer consisting of a PublicApiKey provided by Cam.TV and only associated with the domain/IP of the application server.
+
+### HEADERS
+| Key           |               Value               |            Description |
+|---------------|:---------------------------------:|-----------------------:|
+| Content-Type  | application/x-www-form-urlencoded |                        |
+| Authorization | Bearer {PublicApiKey}             | String given by Cam.TV |
+
+### PARAMS
+| Key           |               Value               |                                           Description |
+|---------------|:---------------------------------:|------------------------------------------------------:|
+| EMail         | application/x-www-form-urlencoded |                                                       |
+| Password      | Bearer {PublicApiKey}             |                                String given by Cam.TV |
+| RedirectURI   | {Your_Site}                       |     Where you will be redirected after authentication |
+| TempAuthToken | {TempToken}                       | Unique string which will grant you access to the APIs |
+| ProductCode   | {ABBO:NAME}                       |              Name of the subscription you want to buy |
 
 ## Responses
-Each API Response is in JSON format
+Each API Response is in JSON format. Here are a few examples:
 
-## Examples
-Examples of uses of the Cam.TV ExternalIntegration APIs can be found at [Postman Documentation](https://documenter.getpostman.com/view/9304344/SW7Z48Z2)
+https://www.cam.tv/api/externalintegration/v2/authorize 
+```
+{
+    "Status": "Authorized",
+    "UserData": {
+		"FirstName": {{FirstName}},
+		"LastName": {{LastName}},
+		"AbboType": {{AbboType}},
+		"CreationDateTime": {{CreationDateTime}},
+		"IsFounder": {{IsFounder}},
+		"CID": G1766,
+		"ParentFirstName": {{ParentFirstName}},
+		"ParentLastName": {{ParentLastName}},
+		"ParentCID": {{ParentCID}},
+		"VirtualParentFirstName": {{VirtualParentFirstName}},
+		"VirtualParentLastName": {{VirtualParentLastName}},
+		"VirtualParentCID": {{VirtualParentCID}}
+	}
+}
+```
 
+https://www.cam.tv/api/externalintegration/v2/purchase_abbo
+```
+{
+	"Result": "Payment completed",
+	"User": {
+			"FirstName": {{FirstName}},
+			"LastName": {{LastName}},
+			"Abbo": {{AbboType}},
+			"DataRegistrazione": {{DataRegistrazione}},
+			"CID": G1766,
+			"ParentFirstName": {{ParentFirstName}},
+			"ParentLastName": {{ParentLastName}},
+			"ParentCID": {{ParentCID}},
+			"VirtualParentLastName": {{VirtualParentLastName}},
+			"VirtualParentFirstName": {{VirtualParentFirstName}},
+			"VirtualParentCID": {{VirtualParentCID}}
+		}
+}
+```
+
+https://www.cam.tv/api/externalintegration/v2/get_listing
+```
+{
+    "Status": "Listing",
+    "Articles": [
+        {
+            "FeeOnSalesPerc": 15,
+            "CommissionDirectPerc": 20,
+            "CommissionNetworkPerc": 6,
+            "Name": "Basic",
+            "CostEuro": 490000,
+            "Period": 2,
+            "Type": 13,
+            "DaysDuration": 365,
+            "FeePercent": 5
+        },
+        {
+            "FeeOnSalesPerc": 15,
+            "CommissionDirectPerc": 20,
+            "CommissionNetworkPerc": 6,
+            "Name": "Basic",
+            "CostEuro": 49000,
+            "Period": 1,
+            "Type": 23,
+            "DaysDuration": 30,
+            "FeePercent": 5
+        },
+        ...
+    ]
+}
+```
 ## Contacts
 For information or requests for clarifications, write to:  [admin@cam.tv](mailto:admin@cam.tv)
