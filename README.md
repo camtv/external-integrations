@@ -1,41 +1,41 @@
 # External Integration API and SDK
-API di Cam.TV per l'accesso, autenticazione e collegamento dell'account Cam.TV di un utente direttamente al dominio dell'applicazione. La documentazione completa delle API unitamente ad esempi di chiamata, è consultabile al link [Documentazione](https://documenter.getpostman.com/view/9304344/SW7Z48Z2).
+Cam.TV API for accessing, authenticating and linking a user's Cam.TV account directly to the application domain. The complete documentation of the API together with call examples, can be consulted at the [Postman Documentation](https://documenter.getpostman.com/view/9304344/SW7Z48Z2).
 
-Le API consentono il login e la registrazione tramite credenziali Cam.TV, permettono di ottenere i dati anagrafici dell'utente e dei relativi sponsor. Offrono inoltre la possibilità di attribuire all'utente uno specifico abbonamento o di un upgrade dello stesso. 
-Infine offrono la possibilità di scollegare l'utente dalla piattaforma rispetto a Cam.TV.
+The APIs allows login and registration through Cam.TV credentials, allows you to obtain the personal data of the user and of the relative sponsors. They also offer the possibility to assign the user a specific subscription or an upgrade of the same.
+Finally, they offer the possibility to disconnect the user from the platform with respect to Cam.TV.
 
-Il processo di autenticazione dell'utente coinvolge anche la parte client della piattaforma, in quanto proprio da questa si origina la richiesta iniziale. Cam.TV fornisce uno script javascript da inserire nella pagina, che esporta una funzione di inizializzazione del flusso di autenticazione dell'utente presso Cam.TV. Il flusso avviene in una finestra pop-up su domnio Cam.TV, alla conclusione il controllo ritorna alla finestra chiamante (il sito dell'applicazione), unitamente ad un TemporaryAuthToken che permette al server dell'applicazione di completare la procedura ed ottenere i dati dell'utente. La figura seguente illustra gli step previsti.
+The user authentication process also involves the client part of the platform, as the initial request originates from this. Cam.TV provides a javascript script to be inserted in the page, which exports an initialization function of the user authentication flow to Cam.TV. The flow takes place in a pop-up window on Cam.TV domain, at the end the control returns to the calling window (the application site), together with a TemporaryAuthToken which allows the application server to complete the procedure and obtain the data user. The following figure illustrates the planned steps.
 
-![alt flusso di autenticazione](https://bootcamp.r.worldssl.net/camtv_xnet_auth.jpg "Flusso di autenticazione")
+![alt authentication flow](https://bootcamp.r.worldssl.net/camtv_xnet_auth.jpg "authentication flow")
 
-# Implementazione Frontend
-Per aggiungere il popup di login con Cam.TV, va inserito il seguente script:
+# Frontend Implementation
+To add the login popup with Cam.TV, the following script must be inserted:
 	
 	<script type="text/javascript" src="https://www.cam.tv/assets/js/camtv_login.js"></script>
 	<div class="wrapper">
 		<script>
 			var settings = {
 				RedirectURI: "{{RedirectURI}}",
-				ApiKey: "{{SecretApiKey}}"
+				ApiKey: "{{PrivateApiKey}}"
 			}
 		</script>
-		<button onclick="CTVLogin.Login(settings);">Accedi con Cam.TV</button>
+		<button onclick="CTVLogin.Login(settings);">Login with Cam.TV</button>
 	</div>
 
-## Le chiavi PrivateApiKey e PublicApiKey
-Per autenticare l'utente e abilitarlo all'utilizzo delle API ExternalIntegration è necessario che la vostra piattaforma disponga delle chiavi PublicApiKey e PrivateApiKey. Queste chiavi sono essenzialmente delle credenziali che vengono fornite da parte di Cam.TV su richiesta. Queste chiavi non devono essere assolutamente condivise con terzi, e per motivi di sicurezza non potranno essere fornite nuovamente se perdute. Le chiavi, insieme al TempAuthToken che è un token temporaneo generato al login dell'utente in funzione delle due chiavi, sono l'unico modo per fornire a piattaforme di terzi i dati dell'utente Cam.TV che si è autenticato, insieme a quelli dei suoi sponsor.
+## The PrivateApiKey and PublicApiKey keys
+To authenticate the user and enable him to use the ExternalIntegration API, your platform must have the PublicApiKey and PrivateApiKey keys. These keys are essentially credentials that are provided by Cam.TV on request. These keys must not be shared with third parties, and for security reasons they cannot be provided again if lost. The keys, together with the TempAuthToken which is a temporary token generated at the user's login according to the two keys, are the only way to provide the third-party platforms with the data of the Cam.TV user who has authenticated himself, together with those of its sponsors.
 	
-## Versione
-API ExternalIntegration Cam.TV V2.0
+## Version
+API ExternalIntegration Cam.TV v2.0
 
 ## Requests
-Tutte le API Requests prevedono il metodo POST form-url-encoded. Le api sono intese server-to-server, l'autenticazione avviene mediante header Authorization con Bearer costituito da una SecretApiKey fornita da Cam.TV ed unicamente associata al dominio / IP del server dell'applicazione.
+All API Requests includes the POST form-url-encoded method. APIs are intended server-to-server, authentication is done through header Authorization with Bearer consisting of a SecretApiKey provided by Cam.TV and only associated with the domain/IP of the application server.
 
 ## Responses
-Tutte le API Responses sono in formato JSON
+Each API Response is in JSON format
 
-## Esempi
-Esempi sull'utilizzo delle API ExternalIntegration di Cam.TV possono essere consultate dalla [Documentazione](https://documenter.getpostman.com/view/9304344/SW7Z48Z2)
+## Examples
+Examples of uses of the Cam.TV ExternalIntegration APIs can be found at [Postman Documentation](https://documenter.getpostman.com/view/9304344/SW7Z48Z2)
 
-## Contatto
-Per informazioni o richieste di chiarimento, scrivere a:  [admin@cam.tv](mailto:admin@cam.tv)
+## Contacts
+For information or requests for clarifications, write to:  [admin@cam.tv](mailto:admin@cam.tv)
